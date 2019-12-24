@@ -3,7 +3,7 @@
 安装了nginx 1.17.5，php 7.3.4。PHP的拓展支持redis,mongodb,memcache,grpc,protobuf,swoole,yaf,mysql,mbstring,bmath,curl,mhash  
 不需要啥就注释啥
 
-注:阿里郎的网络真心对php、nginx官网不友好  经常下载丢吧然后退出  因此带了本地文件  不放心的小朋友将dockerfile对应行注释换上官网链接即可~
+注:阿里郎的网络真心对php、nginx官网不友好  经常下载丢包然后退出  因此带了本地文件  不放心的小朋友将dockerfile对应行注释换上官网链接即可~
 
 
 
