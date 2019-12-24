@@ -37,3 +37,6 @@ docker login # 先登录
 docker tag nginx-php:v1 Sam/nginx-php:v1
 
 docker push Sam/nginx-php:v1
+
+
+
