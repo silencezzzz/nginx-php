@@ -39,7 +39,7 @@ docker tag nginx-php:v1 Sam/nginx-php:v1
 docker push Sam/nginx-php:v1
 
 
-![Image text](https://github.com/silencezzzz/img/blob/master/php7.3.4-nginx.jpg)
+![Image text](https://raw.githubusercontent.com/silencezzzz/img/master/php7.3.4-nginx.jpg)
 
 
 
