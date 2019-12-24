@@ -23,7 +23,7 @@ docker build --no-cache -t nginx-php:v1 .
 
 #启动镜像
 
-docker run -d -p 8096:80 --name=nginx-php nginx-php:v1
+docker run -d -p 8080:80 --name=nginx-php nginx-php:v1
 
 
 #进入镜像容器内
