@@ -18,22 +18,22 @@
 docker pull joker950618/nginx-php:v1
 
 
-#构建镜像
+##构建镜像
 
 git clone https://github.com/silencezzzz/nginx-php.git
 
 docker build --no-cache -t nginx-php:v1 .
 
-#启动镜像
+##启动镜像
 
 docker run -d -p 8080:80 --name=nginx-php nginx-php:v1
 
 
-#进入镜像容器内
+##进入镜像容器内
 
 docker exec -it nginx-php sh
 
-#推送镜像
+##推送镜像
 
 docker login # 先登录
 
