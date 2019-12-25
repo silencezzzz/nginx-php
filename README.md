@@ -1,4 +1,4 @@
-# nginx-php
+<h1 align="center">nginx-php</h1>
 
 > 寂寞，成为更好的自己
 
@@ -42,8 +42,9 @@ docker tag nginx-php:v1 yourName/nginx-php:v1
 docker push yourName/nginx-php:v1
 ```
 ### 效果
-![Image text](https://raw.githubusercontent.com/silencezzzz/img/master/php7.3.4-nginx.jpg)
-![Image text](https://raw.githubusercontent.com/silencezzzz/img/master/phpkuozhan.jpg)
+<p align="center"><img src="https://raw.githubusercontent.com/silencezzzz/img/master/php7.3.4-nginx.jpg"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/silencezzzz/img/master/phpkuozhan.jpg"></p>
+
 
 
 
