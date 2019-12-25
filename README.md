@@ -1,5 +1,7 @@
 <center size=100>*nginx-php*</center>
+
 > 寂寞，成为更好的自己
+
 ### 主要特性
 
 基于**Alpine Linux**最小化Linux环境加速构建镜像。
