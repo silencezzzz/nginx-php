@@ -1,6 +1,6 @@
-# nginx-php
+# <center>nginx-php</center>
 > 寂寞，成为更好的自己
-## 主要特性
+### 主要特性
 
 基于**Alpine Linux**最小化Linux环境加速构建镜像。
 
@@ -12,28 +12,26 @@
 
 ***
 
-## 直接拉取镜像使用  则不需要往后步骤
+### 直接拉取镜像使用  则不需要往后步骤
 ```
 docker pull joker950618/nginx-php:v1
-
 ```
 
-## 构建镜像
+### 构建镜像
 ``` 
 git clone https://github.com/silencezzzz/nginx-php.git
 
 docker build --no-cache -t nginx-php:v1 .
 ```
-## 启动镜像
+### 启动镜像
 ```
 docker run -d -p 8080:80 --name=nginx-php nginx-php:v1
-
 ```
-## 进入镜像容器内
+### 进入镜像容器内
 ```
 docker exec -it nginx-php sh
 ```
-## 推送镜像
+### 推送镜像
 ```
 docker login # 先登录
 
@@ -41,7 +39,7 @@ docker tag nginx-php:v1 yourName/nginx-php:v1
 
 docker push yourName/nginx-php:v1
 ```
-## 效果
+### 效果
 ![Image text](https://raw.githubusercontent.com/silencezzzz/img/master/php7.3.4-nginx.jpg)
 ![Image text](https://raw.githubusercontent.com/silencezzzz/img/master/phpkuozhan.jpg)
 
