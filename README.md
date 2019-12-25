@@ -13,7 +13,7 @@
 基于Alpine Linux 最小化Linux环境加速构建镜像。
 
 
-#直接拉取镜像使用  则不需要以下步骤
+##直接拉取镜像使用  则不需要以下步骤
 
 docker pull joker950618/nginx-php:v1
 
