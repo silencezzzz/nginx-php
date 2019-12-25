@@ -1,4 +1,4 @@
-#                                                       <center>nginx-php</center>
+<center size=100>*nginx-php*</center>
 > 寂寞，成为更好的自己
 ### 主要特性
 
