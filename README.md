@@ -13,6 +13,9 @@
 基于Alpine Linux 最小化Linux环境加速构建镜像。
 
 
+#直接拉取镜像使用  则不需要以下步骤
+
+docker pull joker950618/nginx-php:v1
 
 
 #构建镜像
@@ -34,9 +37,9 @@ docker exec -it nginx-php sh
 
 docker login # 先登录
 
-docker tag nginx-php:v1 Sam/nginx-php:v1
+docker tag nginx-php:v1 yourName/nginx-php:v1
 
-docker push Sam/nginx-php:v1
+docker push yourName/nginx-php:v1
 
 
 ![Image text](https://raw.githubusercontent.com/silencezzzz/img/master/php7.3.4-nginx.jpg)
