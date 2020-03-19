@@ -135,7 +135,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
         } | tee $PHP_DIR/etc/php-fpm.d/docker.conf \
         && rm -rf $PHP_DIR/etc/php-fpm.d/www.conf \
         && export -n CFLAGS CPPFLAGS LDFLAGS \
-        && cd / && apk del .php-deps && rm -rf /usr/src/php && rm -rf /tmp/pear ~/.pearrc \
+        && cd / && apk del .php-deps &&  rm -rf /tmp/pear ~/.pearrc \
         \
         && ln -s $PHP_DIR/bin/php /usr/local/bin/php \
         && ln -s $PHP_DIR/bin/phpdbg /usr/local/bin/phpdbg \
