@@ -26,6 +26,7 @@ COPY ./soft/nginx-$NGINX_VERSION.tar.gz /usr/src/nginx-$NGINX_VERSION.tar.gz
 COPY ./soft/protobuf-3.10.0.tgz /usr/src/protobuf-3.10.0.tgz
 COPY ./soft/event-2.3.0.tgz /usr/src/event-2.3.0.tgz
 COPY ./soft/redis-5.0.2.tgz /usr/src/redis-5.0.2.tgz
+COPY ./soft/gmp-6.2.0.tar.xz /usr/src/gmp-6.2.0.tar.xz
 
 COPY index.php /home/www-data/index.php 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \      
@@ -38,11 +39,13 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
         \
         #开始安装php
         && export CFLAGS="-fstack-protector-strong -fpic -fpie -O2" CPPFLAGS="-fstack-protector-strong -fpic -fpie -O2" LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie" \
-        && apk add --no-cache --virtual .php-deps bash autoconf dpkg-dev dpkg file g++ gcc libzip-dev libc-dev make pkgconf re2c coreutils curl-dev freetype-dev libpng-dev jpeg-dev zlib-dev libedit-dev libressl-dev libsodium-dev libxml2-dev gettext-dev sqlite-dev  \
+        && apk add --no-cache --virtual .php-deps bash autoconf dpkg-dev dpkg file g++ gcc libzip-dev libc-dev make pkgconf re2c coreutils curl-dev freetype-dev libpng-dev jpeg-dev zlib-dev libedit-dev libressl-dev libsodium-dev libxml2-dev gettext-dev sqlite-dev texinfo   m4  xz \
         \
         #安装libiconv  php的iconv函数需要  若不需要，可以省略  使用本地文件
         # && wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz && tar -xvf libiconv-1.15.tar.gz && rm -rf libiconv-1.15.tar.gz && cd libiconv-1.15 && ./configure --prefix=/usr/local/libiconv && make && make install && make clean && cd .. && rm -rf libiconv-1.15 \
         && cd /usr/src && tar -xvf libiconv-1.15.tar.gz && rm -rf libiconv-1.15.tar.gz && cd libiconv-1.15 && ./configure --prefix=/usr/local/libiconv && make && make install && make clean && cd .. && rm -rf libiconv-1.15 \
+        \
+        && xz -d  gmp-6.2.0.tar.xz && tar -xvf gmp-6.2.0.tar && cd gmp-6.2.0 && ./configure && make && make install&& cd ../ && rm -rf gmp-6.2.0.tar.xz && rm -rf gmp-6.2.0.tar && rm -rf gmp-6.2.0  \
         \
         # && wget -c https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz && tar -zxvf libevent-2.1.8-stable.tar.gz && cd libevent-2.1.8-stable && ./configure --prefix=/usr/local/libevent-2.1.8 &&  make && make install && make clean && cd .. && rm -rf libevent-2.1.8-stable.tar.gz &&  rm -rf libevent-2.1.8-stable  \
         && tar -zxvf libevent-2.1.8-stable.tar.gz && cd libevent-2.1.8-stable && ./configure --prefix=/usr/local/libevent-2.1.8 &&  make && make install && make clean && cd .. && rm -rf libevent-2.1.8-stable.tar.gz &&  rm -rf libevent-2.1.8-stable  \
@@ -91,6 +94,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
         && cd ext && cp /usr/src/protobuf-3.10.0.tgz ./protobuf-3.10.0.tgz && rm -rf /usr/src/protobuf-3.10.0.tgz \
         && cp /usr/src/event-2.3.0.tgz ./event-2.3.0.tgz && rm -rf /usr/src/event-2.3.0.tgz \
         && cp /usr/src/redis-5.0.2.tgz ./redis-5.0.2.tgz && rm -rf /usr/src/redis-5.0.2.tgz \
+        && cd gmp && $PHP_DIR/bin/phpize && ./configure --with-php-config=$PHP_DIR/bin/php-config && make && make install && make clean && cd .. \
+        && { echo 'extension = gmp.so'; } | tee $PHP_DIR/etc/php.d/gmp.ini \
         # && wget http://pecl.php.net/get/mongodb-$PHP_MONGODB.tgz && tar -xvf mongodb-$PHP_MONGODB.tgz && rm -rf mongodb-$PHP_MONGODB.tgz && cd mongodb-$PHP_MONGODB && $PHP_DIR/bin/phpize && ./configure --with-php-config=$PHP_DIR/bin/php-config && make && make install && make clean && cd .. \
         # && { echo 'extension = mongodb.so'; } | tee $PHP_DIR/etc/php.d/mongodb.ini \
         # && wget http://pecl.php.net/get/swoole-$PHP_SWOOLE.tgz && tar -xvf swoole-$PHP_SWOOLE.tgz && rm -rf swoole-$PHP_SWOOLE.tgz && cd swoole-$PHP_SWOOLE && $PHP_DIR/bin/phpize && ./configure --with-php-config=$PHP_DIR/bin/php-config --enable-coroutine --enable-openssl --enable-http2 --enable-sockets --enable-mysqlnd --enable-async-redis && make && make install && make clean && cd .. \
