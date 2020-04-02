@@ -222,7 +222,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
         && export -n CFLAGS \
         && cd / && apk del .nginx-deps && rm -rf /usr/src/nginx \
         \
-        && ln -s $NGINX_DIR/sbin/nginx /usr/local/sbin/nginx 
+        && ln -s $NGINX_DIR/sbin/nginx /usr/local/sbin/nginx \
 
 #安装librdkafka php的rdkafka拓展需要这个依赖
 #         && apk add --no-cache --virtual .kafka-deps bash autoconf dpkg-dev dpkg file g++ gcc make libzip-dev libc-dev \
@@ -231,12 +231,12 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 #         && { echo 'extension = rdkafka.so'; } | tee $PHP_DIR/etc/php.d/rdkafka.ini \ 
 #         && apk del .kafka-deps \
 # #安装rabbitmq-c  php的amqp扩展需要这个依赖   可调用 rabbitmq
-#         && apk add --no-cache --virtual .amqp-deps bash autoconf dpkg-dev dpkg file g++ gcc make libzip-dev libc-dev openssl openssl-dev\    
-#         &&  wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.7.1/rabbitmq-c-0.7.1.tar.gz && tar -zxvf   rabbitmq-c-0.7.1.tar.gz && cd rabbitmq-c-0.7.1 && ./configure --prefix=/usr/local/rabbitmq-c && make && make install && make clean && cd .. && rm -rf rabbitmq-c-0.7.1 && rm -rf rabbitmq-c-0.7.1.tar.gz  \
-#         && wget http://pecl.php.net/get/amqp-$PHP_AMQP.tgz && tar -xvf amqp-$PHP_AMQP.tgz && rm -rf amqp-$PHP_AMQP.tgz && cd amqp-$PHP_AMQP && $PHP_DIR/bin/phpize \
-#         && ./configure --with-php-config=$PHP_DIR/bin/php-config  --with-amqp --with-librabbitmq-dir=/usr/local/rabbitmq-c && make && make install && make clean && cd .. \
-#         && { echo 'extension = amqp.so'; } | tee $PHP_DIR/etc/php.d/amqp.ini \   
-#         && apk del .amqp-deps   
+        && apk add --no-cache --virtual .amqp-deps bash autoconf dpkg-dev dpkg file g++ gcc make libzip-dev libc-dev openssl openssl-dev\    
+        &&  wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.7.1/rabbitmq-c-0.7.1.tar.gz && tar -zxvf   rabbitmq-c-0.7.1.tar.gz && cd rabbitmq-c-0.7.1 && ./configure --prefix=/usr/local/rabbitmq-c && make && make install && make clean && cd .. && rm -rf rabbitmq-c-0.7.1 && rm -rf rabbitmq-c-0.7.1.tar.gz  \
+        && wget http://pecl.php.net/get/amqp-$PHP_AMQP.tgz && tar -xvf amqp-$PHP_AMQP.tgz && rm -rf amqp-$PHP_AMQP.tgz && cd amqp-$PHP_AMQP && $PHP_DIR/bin/phpize \
+        && ./configure --with-php-config=$PHP_DIR/bin/php-config  --with-amqp --with-librabbitmq-dir=/usr/local/rabbitmq-c && make && make install && make clean && cd .. \
+        && { echo 'extension = amqp.so'; } | tee $PHP_DIR/etc/php.d/amqp.ini \   
+        && apk del .amqp-deps   
 
 
 COPY ./vhost/api.conf $NGINX_DIR/conf.d/api.conf
